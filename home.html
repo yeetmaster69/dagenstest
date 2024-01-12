@@ -1,0 +1,58 @@
+<link rel="stylesheet" type="text/css" href="styles.css" />
+<head>
+<script type="text/javascript">src="db.js"</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+<form id="ProductFrom" onsubmit="return false">
+	<input id="nameInput" placeholder="Name"> </input>
+	<input id="categoryInput" placeholder="Category"> </input>
+	<input id="priceInput" placeholder="Price"> </input>
+	<button id="submitButton" onclick="module.addItem()"> Add Item </button>
+</form>
+<text> OR </text>
+<form id="NidSearch" onsubmit="return false">
+	<input id="idInput" placeholder="Enter Id" onchange="module.displayItemInfo()"> </input>
+	<text id="IdReturnInfo"></text>
+	<input id="productCount" placeholder="Number of Closest Products"> </input>
+	<button id="NidSubmit" onclick="module.searchItems()"> Search </button>
+</form>
+<button id="clearSearch" onclick="module.clearSearch()"> Clear Search </button>
+
+<table id="ProductTable">
+  <thead>
+	<tr>
+        <th onclick="module.sortTable(1)">Name</th>
+	<th onclick="module.sortTable(2)">Category</th>
+	<th onclick="module.sortTable(3)">Price</th>
+	</tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+  <button id="nextButton" onclick="module.paging(0)"> PREVIOUS </button>
+  <button id="backButton" onclick="module.paging(1)"> NEXT </button>
+
+</body>
+
+<script>
+const module = {};
+</script>
+
+<script type="module">
+      import products from "./db.js";
+      import { paging, layoutTable, sortTable, addItem, clearSearch, searchItems, displayItemInfo } from "./app.js";
+      module.layoutTable = layoutTable
+      module.sortTable = sortTable
+      module.paging = paging
+      module.addItem = addItem
+      module.searchItems = searchItems
+      module.displayItemInfo = displayItemInfo
+      module.clearSearch = clearSearch
+      module.layoutTable(products)
+</script>
+
+
